@@ -50,6 +50,12 @@ instance Monad ParseASN1 where
         case runP m1 s of
             Left err      -> Left err
             Right (a, s2) -> runP (m2 a) s2
+instance Alternative ParseASN1 where
+    empty = P $ \_ -> Left "empty Alternative"
+    (<|>) m1 m2 = P $ \s ->
+        case runP m1 s of
+            Left _        -> runP m2 s
+            Right (a, s2) -> Right (a, s2)
 
 get :: ParseASN1 [ASN1]
 get = P $ \stream -> Right (stream, stream)
