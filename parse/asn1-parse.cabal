@@ -21,6 +21,14 @@ Library
   Exposed-modules:   Data.ASN1.Parse
   ghc-options:       -Wall
 
+Test-Suite t1
+  build-depends:     base >= 3 && < 5
+                   , bytestring
+                   , asn1-types >= 0.3 && < 0.4
+                   , asn1-encoding >= 0.9
+  type:              exitcode-stdio-1.0
+  main-is:           test/Test.hs
+
 source-repository head
   type:     git
   location: https://github.com/vincenthz/hs-asn1
